@@ -20,4 +20,11 @@
         android:title="@string/most_popular"
         android:orderInCategory="3"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/favorite"
+        android:title="@string/favorite"
+        android:orderInCategory="4"
+        app:showAsAction="never" />
+
 </menu>

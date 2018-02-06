@@ -12,16 +12,32 @@ import java.util.Scanner;
 
 public class NetworkUtils {
     private final static String theMovieDBBaseURL = "http://image.tmdb.org/t/p/";
-    private final static String size = "w185";
+    //private final static String size = "w780";
+    private final static String size = "w342";
+   // private final static String size = "w500";
+
     private final static String baseMovieUrl = "http://api.themoviedb.org/3";
     private final static String askKey = "api_key";
     private static Uri builtUri = null;
+    private final static String uTube = "https://www.youtube.com";
+    private final static String watch = "watch";
+    private final static String v = "v";
 
 
     //Insert your API Key in variable 'apiKey'
     private final static String apiKey = "";
 
 
+
+    public static Uri uTubeUrl(String videoKey) {
+        builtUri = Uri.parse(uTube).buildUpon()
+                .appendEncodedPath(watch)
+                .appendQueryParameter(v,videoKey)
+                .build();
+
+
+        return builtUri;
+    }
 
 
     public static Uri buildUri(String movieDBSearchQuery) {

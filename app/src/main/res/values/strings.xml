@@ -4,10 +4,19 @@
         An error has occurred. Please try again by clicking REFRESH
     </string>
     <string name="plot_synopsis">Plot Synopsis</string>
-<string name="user_rating">User Rating</string>
+    <string name="user_rating">User Rating</string>
     <string name="release_date">Release Date</string>
     <string name="most_popular">Most Popular</string>
     <string name="top_rated">Highest Rated</string>
     <string name="refresh">Refresh</string>
     <string name="poster">Movie Poster</string>
+    <string name="movie_detail">Movie Details</string>
+    <string name="favorite">Favorite Movies</string>
+    <string name="trailer">Trailers:</string>
+    <string name="review">Reviews:</string>
+    <string name="fav_star">Favorite Icon</string>
+    <string name="play_video">Play Video</string>
+    <string name="mark_fav">Mark as favorite</string>
+    <string name="marked_fav">Marked as favorite</string>
+
 </resources>

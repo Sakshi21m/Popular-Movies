@@ -25,7 +25,7 @@ public class PopularMoviesJsonUtil {
 
             if(!results.isNull(i)) {
 
-                int movieId;
+                Long movieId;
                 String voteAverage;
                 String originalTitle;
                 String posterPath;
@@ -34,7 +34,7 @@ public class PopularMoviesJsonUtil {
 
                 ArrayList<String> innerArray = new ArrayList<>();
 
-                movieId = results.getJSONObject(i).getInt("id");
+                movieId = results.getJSONObject(i).getLong("id");
                 voteAverage = results.getJSONObject(i).getString("vote_average");
                 originalTitle = results.getJSONObject(i).getString("original_title");
                 posterPath = results.getJSONObject(i).getString("poster_path");
@@ -62,4 +62,82 @@ public class PopularMoviesJsonUtil {
         }
         return pmData;
     }
+
+    public static List<List<ArrayList>> getReviewVideoList(String jsonVideos,String jsonReview) throws JSONException{
+
+        List<List<ArrayList>> ls = new ArrayList<>();
+        List<ArrayList> listVideo= new ArrayList<>();
+        List<ArrayList> listReview= new ArrayList<>();
+
+
+        JSONObject jsonObject = new JSONObject(jsonVideos);
+
+        JSONArray videoList = jsonObject.getJSONArray("results");
+        for (int i =0; i<videoList.length();i++){
+
+            if(!videoList.isNull(i)){
+
+                ArrayList innerArray = new ArrayList();
+
+                String id;
+                String iso_639_1;
+                String iso_3166_1;
+                String key;
+                String name;
+                String site;
+                int size;
+                String type;
+
+                id = videoList.getJSONObject(i).getString("id");
+                iso_639_1 = videoList.getJSONObject(i).getString("iso_639_1");
+                iso_3166_1 = videoList.getJSONObject(i).getString("iso_3166_1");
+                key = videoList.getJSONObject(i).getString("key");
+                name = videoList.getJSONObject(i).getString("name");
+                site = videoList.getJSONObject(i).getString("site");
+                size = videoList.getJSONObject(i).getInt("size");
+                type = videoList.getJSONObject(i).getString("type");
+
+                innerArray.add(0,id);
+                innerArray.add(1,iso_639_1);
+                innerArray.add(2,iso_3166_1);
+                innerArray.add(3,key);
+                innerArray.add(4,name);
+                innerArray.add(5,site);
+                innerArray.add(6,size);
+                innerArray.add(7,type);
+
+                listVideo.add(innerArray);
+
+            }
+        }
+
+        JSONObject jsonObjectReview  = new JSONObject(jsonReview);
+
+        JSONArray resultsReview = jsonObjectReview.getJSONArray("results");
+        for(int i=0;i<resultsReview.length();i++){
+
+            if(!resultsReview.isNull(i)){
+                String id;
+                String author;
+                String content;
+                ArrayList innerArray = new ArrayList();
+
+
+                id = resultsReview.getJSONObject(i).getString("id");
+                author = resultsReview.getJSONObject(i).getString("author");
+                content = resultsReview.getJSONObject(i).getString("content");
+
+                innerArray.add(0,id);
+                innerArray.add(1,author);
+                innerArray.add(2,content);
+
+                listReview.add(innerArray);
+            }
+        }
+        ls.add(0,listVideo);
+        ls.add(1,listReview);
+        return ls;
+
+    }
+
 }

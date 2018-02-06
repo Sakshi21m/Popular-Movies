@@ -21,8 +21,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.GridViewHolder> {
     private List<ArrayList> popularMovieData;
     private Context context;
     private final MovieAdapterOnClickHandler clickHandler;
+
     public Adapter(MovieAdapterOnClickHandler cHandler)
     {
+
         clickHandler = cHandler;
     }
 
@@ -66,6 +68,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.GridViewHolder> {
         {
 //fetching posterPath from list
             if(!popularMovieData.isEmpty()) {
+
                 String ll = popularMovieData.get(listPosition).get(3).toString();
                 link = NetworkUtils.buildUri(ll);
                 Picasso.with(context).load(link).into(imageView);
