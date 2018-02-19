@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
@@ -38,16 +39,25 @@ public class MovieDetails extends AppCompatActivity implements  AdapterVideo.Mov
     private String mReleaseDate = null;
     private ProgressBar mLoadingIndicator;
     private TextView mErrorMessageDisplay;
-    private final static int REVIEW_LOADER = 30;
-    private RecyclerView recyclerView;
+    private final static int LOADER = 30;
+    private RecyclerView recyclerViewReview;
     private RecyclerView recyclerViewVideo;
+    private static final String SAVED_LAYOUT_MANAGER="Review";
+    private static final String SAVED_LAYOUT_MANAGER_VIDEO="Video";
+
 
     private AdapterReview mAdapter;
     private AdapterVideo mVideoAdapter;
+    private Parcelable layoutManagerSavedState;
+    private Parcelable layoutManagerSavedStateVideo;
+
 
 
     private static final String VIDEO = "video";
     private static final String REVIEWS = "review";
+    private LinearLayoutManager layoutManager;
+    private LinearLayoutManager layoutManager2;
+
     //public static final String SEARCH_TYPE = "searchType";
 
 
@@ -73,7 +83,7 @@ public class MovieDetails extends AppCompatActivity implements  AdapterVideo.Mov
 
                 movieId = Long.parseLong(bundle.getString("movieId",null));
                 mTitle = bundle.getString("title", null);
-                mRating = bundle.getString("voteAverage", null)+"/10";
+                mRating = bundle.getString("voteAverage", "0");
                 mPosterPath = bundle.getString("posterPath", null);
                 mOverview = bundle.getString("overview", null);
                 mReleaseDate = bundle.getString("releaseDate", null);
@@ -98,35 +108,32 @@ public class MovieDetails extends AppCompatActivity implements  AdapterVideo.Mov
                 mErrorMessageDisplay = (TextView) findViewById(R.id.tv_error_message_display2);
                 mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator2);
 
-
-                recyclerView = (RecyclerView) findViewById(R.id.rv_review);
-                LinearLayoutManager layoutManager;
+                recyclerViewReview= (RecyclerView) findViewById(R.id.rv_review);
                 layoutManager = new LinearLayoutManager(this);
                 layoutManager.setOrientation(OrientationHelper.VERTICAL);
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setHasFixedSize(true);
+                recyclerViewReview.setLayoutManager(layoutManager);
+                recyclerViewReview.setHasFixedSize(true);
 
 
                 recyclerViewVideo = (RecyclerView) findViewById(R.id.rv_video_trailers);
-                LinearLayoutManager layoutManager2;
                 layoutManager2 = new LinearLayoutManager(this);
                 layoutManager2.setOrientation(OrientationHelper.VERTICAL);
                 recyclerViewVideo.setLayoutManager(layoutManager2);
                 recyclerViewVideo.setHasFixedSize(true);
 
+
                 mAdapter = new AdapterReview(this);
-                recyclerView.setAdapter(mAdapter);
+                recyclerViewReview.setAdapter(mAdapter);
 
                 mVideoAdapter = new AdapterVideo(this);
                 recyclerViewVideo.setAdapter(mVideoAdapter);
-
 
                 Bundle bundle2 = new Bundle();
                 bundle2.putString(REVIEWS,REVIEWS);
                 bundle2.putString(VIDEO,VIDEO);
 
                 LoaderManager lm = getSupportLoaderManager();
-                lm.initLoader(REVIEW_LOADER,bundle2,this);
+                lm.initLoader(LOADER,bundle2,this);
             }
 
         }catch (Exception e){
@@ -134,8 +141,51 @@ public class MovieDetails extends AppCompatActivity implements  AdapterVideo.Mov
         }
 
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle state) {
+        super.onSaveInstanceState(state);
+        System.out.println("inside onSaveInstanceState");
+        layoutManagerSavedState= layoutManager.onSaveInstanceState();
+        layoutManagerSavedStateVideo =layoutManager2.onSaveInstanceState();
+        System.out.println("sakshi2 is "+layoutManagerSavedStateVideo.toString());
+        state.putParcelable(SAVED_LAYOUT_MANAGER,layoutManagerSavedState );
+        state.putParcelable(SAVED_LAYOUT_MANAGER_VIDEO,layoutManagerSavedStateVideo);
+    }
+
+
+    @Override
+    protected void onRestoreInstanceState(Bundle state) {
+        super.onRestoreInstanceState(state);
+        System.out.println("inside onRestoreInstanceState");
+
+        if (state !=null) {
+            layoutManagerSavedState = state.getParcelable(SAVED_LAYOUT_MANAGER);
+            layoutManagerSavedStateVideo = state.getParcelable(SAVED_LAYOUT_MANAGER_VIDEO);
+
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        System.out.println("inside onResume");
+
+        if (layoutManagerSavedState != null) {
+            layoutManager.onRestoreInstanceState(layoutManagerSavedState);
+        }
+        if (layoutManagerSavedStateVideo!=null) {
+            layoutManager2.onRestoreInstanceState(layoutManagerSavedStateVideo);
+        }
+    }
+
+
+
+
+
+
     private void showErrorMessage() {
-        recyclerView.setVisibility(View.INVISIBLE);
+        recyclerViewReview.setVisibility(View.INVISIBLE);
         recyclerViewVideo.setVisibility(View.INVISIBLE);
         mErrorMessageDisplay.setVisibility(View.VISIBLE);
         mLoadingIndicator.setVisibility(View.INVISIBLE);

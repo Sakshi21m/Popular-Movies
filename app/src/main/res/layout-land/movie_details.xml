@@ -3,20 +3,22 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" android:id="@+id/scroll_movie_details">
 
     <android.support.constraint.ConstraintLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:id="@+id/linear_movie_detail">
 
         <TextView
             android:id="@+id/movie_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="MovieName"
             android:paddingLeft="20dp"
+            android:paddingStart="20dp"
+
             android:paddingBottom="30dp"
             android:paddingTop="30dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -107,6 +109,10 @@
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+
+            android:id="@+id/bg_one"
+
 
             />
 
@@ -115,7 +121,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
             android:text="@string/trailer"
             android:textSize="24sp"
             android:layout_marginTop="20dp"
@@ -144,6 +149,9 @@
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:id="@+id/bg_two"
+
             />
 
         <TextView
@@ -151,7 +159,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
             android:text="@string/review"
             android:layout_marginTop="20dp"
             android:textSize="24sp"

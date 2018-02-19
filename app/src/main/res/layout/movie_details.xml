@@ -2,10 +2,11 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" android:id="@+id/scroll_movie_details">
     <LinearLayout
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/linear_movie_detail"
         >
 
 
@@ -102,6 +103,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
+            android:id="@+id/bg_one"
 
             />
         <TextView
@@ -117,8 +119,8 @@
             android:textStyle="bold"/>
 
         <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/rv_video_trailers">
         </android.support.v7.widget.RecyclerView>
 
@@ -130,6 +132,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
+            android:id="@+id/bg_two"
+
             />
         <TextView
             android:id="@+id/reviews"
@@ -144,8 +148,8 @@
             android:textStyle="bold"/>
 
         <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/rv_review">
         </android.support.v7.widget.RecyclerView>
 

@@ -51,7 +51,7 @@ public class PopularMoviesJsonUtil {
                 * 5     release date
                 * */
                     innerArray.add(0, String.valueOf(movieId));
-                    innerArray.add(1, voteAverage);
+                    innerArray.add(1, voteAverage+"/10");
                     innerArray.add(2, originalTitle);
                     innerArray.add(3, posterPath);
                     innerArray.add(4, overview);

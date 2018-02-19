@@ -67,7 +67,7 @@ public class MovieProvider extends ContentProvider {
             if (cursor != null)
                 cursor.setNotificationUri(getContext().getContentResolver(), uri);
         }catch (Exception e){
-
+        System.out.println("error is "+e.toString());
         }
 
         return cursor;

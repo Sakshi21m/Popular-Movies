@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements Adapter.MovieAdap
             public List<ArrayList> loadInBackground() {
                 String sortParam = args.getString(SEARCH_TYPE);
 
-                if (!sortParam.isEmpty()){
+                if (sortParam!=null && !sortParam.isEmpty()){
                     if (sortParam.equals(FAVORITE_MOVIE)) {
 
                         List<ArrayList> outerArray = new ArrayList();
